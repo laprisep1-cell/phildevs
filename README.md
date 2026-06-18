@@ -1,13 +1,13 @@
 # Phil Roblox Dev Portfolio
 
-A dark Roblox developer portfolio for **64_phil**.
+A dark Roblox portfolio for **64_phil**.
 
 ## What is included
 
-- Hero text: `Roblox Dev` and `Low Poly Builds, Faster, Better`
+- Hero text: `Low Poly Builds, Faster, Better`
 - Status pill: `TOO BUSY`
 - Game grid with the Roblox experience card
-- Build image carousel with no descriptions
+- Build image carousel with no descriptions. It only uses images inside the `projects` folder.
 - Contact info for email, Discord, and Roblox profile
 - Tech Stack with only `Skills` and `Softwares`
 - GitHub Pages workflow already included
@@ -24,7 +24,7 @@ projects/candy-map.png
 projects/prop-set.png
 ```
 
-The GitHub Action scans the `projects` folder and turns the images into the carousel.
+The GitHub Action scans the `projects` folder and turns the images into the carousel. PNG files work. Use simple filenames like `low-poly-lobby.png`, then commit and wait for the Action to finish.
 
 ## Update the game card
 

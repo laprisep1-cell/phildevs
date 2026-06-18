@@ -11,9 +11,7 @@ const modal = document.getElementById("projectModal");
 const modalImage = document.getElementById("modalImage");
 const modalClose = document.getElementById("modalClose");
 
-const fallbackProjects = [
-  { title: "Dumpling Thumbnail", image: "media/dumpling-thumbnail.jpg" }
-];
+const fallbackProjects = [];
 
 const fallbackGames = [
   {
@@ -230,10 +228,10 @@ async function loadProjects() {
     if (response.ok) {
       const data = await response.json();
       const loaded = Array.isArray(data) ? data : data.projects;
-      if (Array.isArray(loaded) && loaded.length) projects = loaded;
+      if (Array.isArray(loaded)) projects = loaded;
     }
   } catch (error) {
-    console.warn("Could not load projects.json. Showing fallback carousel.", error);
+    console.warn("Could not load projects.json. Showing an empty carousel.", error);
   }
 
   renderProjects(projects);

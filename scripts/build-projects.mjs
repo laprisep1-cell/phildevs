@@ -23,16 +23,12 @@ function getImages(dir) {
     .sort((a, b) => a.name.localeCompare(b.name))
     .map((entry) => ({
       title: titleFromFileName(entry.name),
-      image: `projects/${entry.name}`
+      image: `projects/${encodeURIComponent(entry.name)}`
     }));
 }
 
 fs.mkdirSync(dataDir, { recursive: true });
 const projects = getImages(projectsDir);
 
-if (projects.length) {
-  fs.writeFileSync(outFile, JSON.stringify({ projects }, null, 2) + "\n");
-  console.log(`Generated ${outFile} with ${projects.length} build image(s).`);
-} else {
-  console.log("No project images found. Keeping existing data/projects.json as the carousel fallback.");
-}
+fs.writeFileSync(outFile, JSON.stringify({ projects }, null, 2) + "\n");
+console.log(`Generated ${outFile} with ${projects.length} build image(s).`);
