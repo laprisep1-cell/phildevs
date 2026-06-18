@@ -1,0 +1,8 @@
+Put your build screenshots in this folder.
+
+Examples:
+Project/low-poly-lobby.png
+Project/candy-map.png
+Project/prop-set.png
+
+PNG, JPG, JPEG, WEBP, GIF, and AVIF files are supported.
