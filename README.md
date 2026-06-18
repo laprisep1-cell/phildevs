@@ -1,67 +1,61 @@
-# Roblox Builder Portfolio
+# Phil Roblox Builder Portfolio
 
-A smooth glassy portfolio website for a Roblox builder. It is designed for GitHub Pages and automatically turns images from one folder into project cards.
+A dark, developer-style Roblox builder portfolio inspired by terminal/code portfolio layouts. It is made for GitHub Pages.
 
-## Folder system
+## Edit your info
 
-Put your images in this folder:
+Open `data/site.json` and change:
 
-```txt
-projects
-```
+- `brand`
+- `heroTitle`
+- `heroSubtitle`
+- `intro`
+- `discord`
+- `discordUrl`
+- `email`
+- `contactText`
 
-Supported image types:
+## Add projects
 
-```txt
-.png .jpg .jpeg .webp .gif .svg
-```
+Put images inside the `projects` folder.
 
-Example:
-
-```txt
-projects/candy-map.png
-```
-
-That becomes a portfolio card named `Candy Map`.
-
-## Edit your text
-
-Open this file:
+Example names:
 
 ```txt
-data/site.json
+map-candy-world.png
+prop-wooden-crate.png
+showcase-medieval-valley.jpg
+lobby-simulator-main.webp
 ```
 
-Change your name, headline, Roblox link, Discord, and email.
+When you push/commit to GitHub, the included GitHub Action scans the `projects` folder and updates `data/projects.json` automatically.
 
 ## Launch on GitHub Pages
 
-1. Create a new GitHub repository.
-2. Upload every file from this folder into the repository.
-3. Go to your repository `Settings`.
-4. Open `Pages` in the left sidebar.
-5. Under `Build and deployment`, choose `GitHub Actions` as the source.
-6. Go to the `Actions` tab and run `Build and deploy portfolio`, or push a new change.
-7. Your website link will appear in the workflow after it deploys.
-
-## Add new work later
-
-1. Add new images to the `projects` folder.
-2. Commit/push the change.
-3. GitHub Actions rebuilds the gallery automatically.
-
-## Local preview
-
-Because the site uses `fetch`, preview it with a small local server instead of double-clicking `index.html`.
-
-With Python installed:
-
-```bash
-python -m http.server 5500
-```
-
-Then open:
+1. Upload every file in this folder to your GitHub repository.
+2. Make sure this file exists in your repo:
 
 ```txt
-http://localhost:5500
+.github/workflows/deploy.yml
 ```
+
+3. Go to **Settings → Pages**.
+4. Set **Source** to **GitHub Actions**.
+5. Go to the **Actions** tab.
+6. Run **Build and deploy portfolio**.
+
+Your website link will look like:
+
+```txt
+https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/
+```
+
+## Important
+
+If you drag files into GitHub from Windows and the `.github` folder does not upload, create this file manually in GitHub:
+
+```txt
+.github/workflows/deploy.yml
+```
+
+Then paste the workflow from the zip.
