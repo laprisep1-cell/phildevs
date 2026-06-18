@@ -3,28 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Roblox builder portfolio for maps, props, environments, and clean game-ready assets." />
-  <title>Phil | Roblox Builder Portfolio</title>
+  <meta name="description" content="Phil / 64_phil Roblox dev portfolio for low poly builds, quick tasks, commissions, in-studio UI, VFX, SFX, and game-ready Roblox work." />
+  <title>Phil | Roblox Dev Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="loader" id="loader" aria-hidden="true">
     <div class="loader-box">
-      <span class="mono">Loading Portfolio</span>
+      <span class="mono">Loading Phil.dev</span>
       <div class="loader-bar"><i></i></div>
     </div>
   </div>
 
-  <div class="cursor-glow" id="cursorGlow"></div>
-  <div class="grid-bg"></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <div class="grid-bg" aria-hidden="true"></div>
 
   <header class="site-header" id="siteHeader">
     <a class="brand" href="#home" aria-label="Go home">
       <span class="prompt">&gt;_</span>
-      <span data-site="brand">phil.dev</span>
+      <span data-site="brand">64_phil.dev</span>
     </a>
 
     <button class="nav-toggle" id="navToggle" aria-label="Open navigation" aria-expanded="false">
@@ -33,28 +33,32 @@
 
     <nav class="nav" id="nav">
       <a href="#home">Home</a>
-      <a href="#projects">Projects</a>
-      <a href="#showcases">Showcases</a>
-      <a href="#workflow">Workflow</a>
-      <a href="#experience">Experience</a>
+      <a href="#games">Games</a>
+      <a href="#screenshots">Builds</a>
       <a href="#stack">Tech Stack</a>
       <a href="#contact">Contact</a>
     </nav>
 
-    <span class="status-pill">Available for work</span>
+    <span class="status-pill busy" data-site="status">TOO BUSY</span>
   </header>
 
   <main>
     <section class="hero section" id="home">
       <div class="hero-copy reveal">
-        <p class="eyebrow">Roblox Builder Portfolio</p>
-        <h1><span data-site="heroTitle">Roblox Builder</span><br><em data-site="heroSubtitle">Maps, Props & Showcases</em></h1>
+        <p class="eyebrow">Roblox Dev Portfolio</p>
+        <h1><span data-site="heroTitle">Roblox Dev</span><br><em data-site="heroSubtitle">Low Poly Builds, Faster, Better</em></h1>
         <p class="hero-text" data-site="intro">
-          I build clean, game-ready Roblox environments with strong shape language, readable layouts, and fast delivery for developers who need polished assets.
+          I make clean Roblox work for other developers: low-poly builds, in-studio models, VFX, SFX, UI work, and quick commission tasks that are easy to use inside real projects.
         </p>
+
+        <div class="profile-strip" aria-label="Contact and profile info">
+          <span data-site="discordDisplay">Discord: 64 phil</span>
+          <a id="robloxProfile" href="https://www.roblox.com/users/8330323665/profile" target="_blank" rel="noreferrer">Roblox: 64_phil</a>
+        </div>
+
         <div class="hero-actions">
-          <a class="btn primary" href="#projects">View Projects</a>
-          <a class="btn ghost" id="discordLink" href="#contact">Discord: <span data-site="discord">@philfromqc</span></a>
+          <a class="btn primary" href="#games">View Games</a>
+          <a class="btn ghost" href="#screenshots">View Builds</a>
         </div>
       </div>
 
@@ -65,13 +69,14 @@
         </div>
         <pre><code id="codePreview">local BuilderProfile = {
   Name = "Phil",
-  Role = "Roblox Builder",
+  Username = "64_phil",
+  Role = "Roblox Dev",
   Style = { "Clean", "Low Poly", "Game Ready" },
-  Focus = { "Maps", "Props", "Showcases" },
+  Focus = { "Maps", "Quick Tasks", "Commissions" },
   Strengths = {
-    "Readable layouts",
-    "Consistent theming",
+    "Responsive",
     "Fast iteration",
+    "Consistent theming",
     "Developer handoff"
   }
 }
@@ -83,128 +88,61 @@ return BuilderProfile</code></pre>
     <section class="section stats reveal" aria-label="Portfolio stats">
       <article>
         <strong data-site="statOne">Fast</strong>
-        <span>Iteration speed</span>
+        <span>small tasks + revisions</span>
       </article>
       <article>
-        <strong data-site="statTwo">Clean</strong>
-        <span>Consistent style</span>
+        <strong data-site="statTwo">Low Poly</strong>
+        <span>clean Roblox style</span>
       </article>
       <article>
         <strong data-site="statThree">Game-ready</strong>
-        <span>Built for Roblox</span>
+        <span>built inside Studio</span>
       </article>
     </section>
 
-    <section class="section" id="projects">
+    <section class="section" id="games">
       <div class="section-heading reveal">
         <p class="eyebrow">Featured Work</p>
-        <h2>Projects</h2>
-        <p>Drop screenshots into the <code>projects</code> folder. GitHub Actions builds this section automatically.</p>
+        <h2>Games I Worked On</h2>
       </div>
 
-      <div class="project-toolbar reveal delay-1">
-        <button class="filter active" data-filter="all">All</button>
-        <button class="filter" data-filter="map">Maps</button>
-        <button class="filter" data-filter="prop">Props</button>
-        <button class="filter" data-filter="showcase">Showcases</button>
-      </div>
-
-      <div class="project-grid" id="projectGrid"></div>
+      <div class="game-grid reveal delay-1" id="gameGrid"></div>
     </section>
 
-    <section class="section split" id="showcases">
+    <section class="section" id="screenshots">
       <div class="section-heading reveal">
-        <p class="eyebrow">Presentation</p>
-        <h2>Build Showcases</h2>
-        <p>Use these cards to explain what other developers are looking for: your role, your process, and why the build works in-game.</p>
+        <p class="eyebrow">Build Images</p>
+        <h2>Build Carousel</h2>
       </div>
 
-      <div class="showcase-list">
-        <article class="showcase-card reveal">
-          <div class="icon">01</div>
-          <div>
-            <h3>Environment Layout</h3>
-            <p>Maps are planned around player readability, routes, landmarks, spawn areas, and clean silhouettes so the scene is not just pretty, but playable.</p>
-            <div class="tags"><span>Maps</span><span>Composition</span><span>Flow</span></div>
-          </div>
-        </article>
-        <article class="showcase-card reveal delay-1">
-          <div class="icon">02</div>
-          <div>
-            <h3>Props & Asset Sets</h3>
-            <p>Props are built to match the same scale, color theme, and detail level so developers can reuse them across lobbies, shops, maps, and UI previews.</p>
-            <div class="tags"><span>Props</span><span>Consistency</span><span>Reuse</span></div>
-          </div>
-        </article>
-        <article class="showcase-card reveal delay-2">
-          <div class="icon">03</div>
-          <div>
-            <h3>Clean Handoff</h3>
-            <p>Models are organized with readable names, simple hierarchy, and developer-friendly structure so the project is easy to script, optimize, and update.</p>
-            <div class="tags"><span>Studio</span><span>Organization</span><span>Delivery</span></div>
-          </div>
-        </article>
+      <div class="carousel-shell reveal delay-1">
+        <button class="carousel-btn prev" id="carouselPrev" aria-label="Previous build image">‹</button>
+        <div class="project-carousel" id="projectCarousel" tabindex="0" aria-label="Build image carousel"></div>
+        <button class="carousel-btn next" id="carouselNext" aria-label="Next build image">›</button>
       </div>
     </section>
 
-    <section class="section" id="workflow">
+    <section class="section service-section" id="services">
       <div class="section-heading reveal">
-        <p class="eyebrow">How I Work</p>
-        <h2>Workflow / Systems</h2>
-        <p>Short, clear cards for devs who want to know how you think before hiring you.</p>
+        <p class="eyebrow">What I Do</p>
+        <h2>Roblox Work</h2>
       </div>
 
-      <div class="workflow-grid">
-        <article class="system-card reveal">
-          <h3>Reference First</h3>
-          <p>I start with style references, scale, mood, and what the build needs to do for gameplay.</p>
-          <span>Planning</span>
+      <div class="service-grid">
+        <article class="service-card reveal">
+          <span class="card-number">01</span>
+          <h3>Low Poly Builds</h3>
+          <p>Clean maps, props, lobbies, and in-studio models with a consistent readable style.</p>
         </article>
-        <article class="system-card reveal delay-1">
-          <h3>Blockout</h3>
-          <p>I shape the map fast first, then improve composition, paths, focal points, and spacing.</p>
-          <span>Layout</span>
+        <article class="service-card reveal delay-1">
+          <span class="card-number">02</span>
+          <h3>Quick Tasks</h3>
+          <p>Small fixes, polish passes, UI objects, SFX/VFX touches, and fast updates for dev teams.</p>
         </article>
-        <article class="system-card reveal delay-2">
-          <h3>Polish Pass</h3>
-          <p>I push materials, lighting, color balance, and small props after the main structure works.</p>
-          <span>Visuals</span>
-        </article>
-        <article class="system-card reveal delay-3">
-          <h3>Dev Handoff</h3>
-          <p>I keep builds organized so other Roblox devs can add scripts, UI, and gameplay without confusion.</p>
-          <span>Delivery</span>
-        </article>
-      </div>
-    </section>
-
-    <section class="section timeline-section" id="experience">
-      <div class="section-heading reveal">
-        <p class="eyebrow">Experience</p>
-        <h2>What I Can Help With</h2>
-      </div>
-
-      <div class="timeline">
-        <article class="timeline-item reveal">
-          <span class="dot"></span>
-          <div>
-            <h3>Roblox Commission Builds</h3>
-            <p>Maps, lobbies, props, and showcase scenes for Roblox developers who need clean work they can present or ship.</p>
-          </div>
-        </article>
-        <article class="timeline-item reveal delay-1">
-          <span class="dot"></span>
-          <div>
-            <h3>Game-Ready Asset Direction</h3>
-            <p>Consistent low-poly / stylized builds with attention to performance, scene clarity, and readable Roblox scale.</p>
-          </div>
-        </article>
-        <article class="timeline-item reveal delay-2">
-          <span class="dot"></span>
-          <div>
-            <h3>Fast Iteration</h3>
-            <p>Quick updates, direct communication, and structure that makes revision rounds easier for both builder and developer.</p>
-          </div>
+        <article class="service-card reveal delay-2">
+          <span class="card-number">03</span>
+          <h3>Commissions</h3>
+          <p>Commission-ready work with clear delivery, organized files, and simple handoff.</p>
         </article>
       </div>
     </section>
@@ -213,61 +151,50 @@ return BuilderProfile</code></pre>
       <div class="section-heading reveal">
         <p class="eyebrow">Toolkit</p>
         <h2>Tech Stack</h2>
-        <p>Tools and skills I use to build, present, and deliver work.</p>
       </div>
 
       <div class="stack-grid reveal">
         <div class="stack-group">
-          <h3>Roblox</h3>
+          <h3>Skills</h3>
+          <span>Building</span>
+          <span>VFX</span>
+          <span>In-studio UI</span>
+          <span>In-studio Models</span>
+          <span>SFX</span>
+          <span>Composing</span>
+        </div>
+        <div class="stack-group">
+          <h3>Softwares</h3>
           <span>Roblox Studio</span>
-          <span>Models</span>
-          <span>Lighting</span>
-          <span>Terrain</span>
-        </div>
-        <div class="stack-group">
-          <h3>Building</h3>
-          <span>Maps</span>
-          <span>Props</span>
-          <span>Showcases</span>
-          <span>Low Poly</span>
-        </div>
-        <div class="stack-group">
-          <h3>Delivery</h3>
-          <span>GitHub Pages</span>
-          <span>Portfolio</span>
-          <span>Fast Updates</span>
-          <span>Organized Files</span>
+          <span>FL Studio</span>
+          <span>Codex for small tasks only</span>
         </div>
       </div>
     </section>
 
     <section class="section contact" id="contact">
       <div class="contact-card reveal">
-        <p class="eyebrow">Get In Touch</p>
-        <h2>Need a builder for your Roblox project?</h2>
-        <p data-site="contactText">Send me your idea, references, budget, and deadline. I can show examples and discuss what kind of build fits your game.</p>
-        <div class="contact-actions">
-          <a class="btn primary" id="contactDiscord" href="https://discord.com/" target="_blank" rel="noreferrer">Discord</a>
-          <a class="btn ghost" id="contactEmail" href="mailto:philfromqc@gmail.com">Email</a>
-        </div>
-        <div class="mini-meta">
-          <span>Payments: Robux / PayPal</span>
-          <span>Availability: Daily check-ins</span>
-          <span>Timezone: Canada / EST</span>
+        <p class="eyebrow">Contact</p>
+        <h2>Need Roblox work?</h2>
+        <p data-site="contactText">Reach out with the game link, references, what you need built, your budget, and the deadline.</p>
+
+        <div class="contact-lines">
+          <p><strong>Email:</strong> <a id="contactEmail" href="mailto:philfromqc@gmail.com">philfromqc@gmail.com</a></p>
+          <p><strong>Discord:</strong> <span data-site="discordName">64 phil</span></p>
+          <p><strong>Roblox:</strong> <a id="contactRoblox" href="https://www.roblox.com/users/8330323665/profile" target="_blank" rel="noreferrer">64_phil</a></p>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <span>Designed for Roblox portfolio use.</span>
+    <span>Built for Roblox developer presentation.</span>
     <a href="#home">Back to top ↑</a>
   </footer>
 
   <div class="modal" id="projectModal" aria-hidden="true">
     <button class="modal-close" id="modalClose" aria-label="Close preview">×</button>
-    <img id="modalImage" src="" alt="Project preview" />
-    <div class="modal-caption" id="modalCaption"></div>
+    <img id="modalImage" src="" alt="Build preview" />
   </div>
 
   <script src="script.js"></script>

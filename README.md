@@ -1,61 +1,51 @@
-# Phil Roblox Builder Portfolio
+# Phil Roblox Dev Portfolio
 
-A dark, developer-style Roblox builder portfolio inspired by terminal/code portfolio layouts. It is made for GitHub Pages.
+A dark Roblox developer portfolio for **64_phil**.
 
-## Edit your info
+## What is included
 
-Open `data/site.json` and change:
+- Hero text: `Roblox Dev` and `Low Poly Builds, Faster, Better`
+- Status pill: `TOO BUSY`
+- Game grid with the Roblox experience card
+- Build image carousel with no descriptions
+- Contact info for email, Discord, and Roblox profile
+- Tech Stack with only `Skills` and `Softwares`
+- GitHub Pages workflow already included
 
-- `brand`
-- `heroTitle`
-- `heroSubtitle`
-- `intro`
-- `discord`
-- `discordUrl`
-- `email`
-- `contactText`
+## Update your build images
 
-## Add projects
+Put images inside the `projects` folder, then commit the changes.
 
-Put images inside the `projects` folder.
-
-Example names:
+Example:
 
 ```txt
-map-candy-world.png
-prop-wooden-crate.png
-showcase-medieval-valley.jpg
-lobby-simulator-main.webp
+projects/low-poly-lobby.png
+projects/candy-map.png
+projects/prop-set.png
 ```
 
-When you push/commit to GitHub, the included GitHub Action scans the `projects` folder and updates `data/projects.json` automatically.
+The GitHub Action scans the `projects` folder and turns the images into the carousel.
+
+## Update the game card
+
+Edit this file:
+
+```txt
+data/games.json
+```
+
+## Update your name, email, Discord, or Roblox link
+
+Edit this file:
+
+```txt
+data/site.json
+```
 
 ## Launch on GitHub Pages
 
-1. Upload every file in this folder to your GitHub repository.
-2. Make sure this file exists in your repo:
-
-```txt
-.github/workflows/deploy.yml
-```
-
-3. Go to **Settings → Pages**.
-4. Set **Source** to **GitHub Actions**.
-5. Go to the **Actions** tab.
-6. Run **Build and deploy portfolio**.
-
-Your website link will look like:
-
-```txt
-https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/
-```
-
-## Important
-
-If you drag files into GitHub from Windows and the `.github` folder does not upload, create this file manually in GitHub:
-
-```txt
-.github/workflows/deploy.yml
-```
-
-Then paste the workflow from the zip.
+1. Upload all files to your repo.
+2. Go to **Settings → Pages**.
+3. Set **Source** to **GitHub Actions**.
+4. Go to the **Actions** tab.
+5. Run **Build and deploy portfolio**.

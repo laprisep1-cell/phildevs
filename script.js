@@ -3,30 +3,25 @@ const cursorGlow = document.getElementById("cursorGlow");
 const navToggle = document.getElementById("navToggle");
 const nav = document.getElementById("nav");
 const header = document.getElementById("siteHeader");
-const projectGrid = document.getElementById("projectGrid");
+const gameGrid = document.getElementById("gameGrid");
+const projectCarousel = document.getElementById("projectCarousel");
+const carouselPrev = document.getElementById("carouselPrev");
+const carouselNext = document.getElementById("carouselNext");
 const modal = document.getElementById("projectModal");
 const modalImage = document.getElementById("modalImage");
-const modalCaption = document.getElementById("modalCaption");
 const modalClose = document.getElementById("modalClose");
 
 const fallbackProjects = [
+  { title: "Dumpling Thumbnail", image: "media/dumpling-thumbnail.jpg" }
+];
+
+const fallbackGames = [
   {
-    title: "Medieval Valley Showcase",
-    image: "",
-    description: "Replace this card by uploading your screenshots into the projects folder.",
-    tags: ["showcase", "map", "environment"]
-  },
-  {
-    title: "Stylized Prop Set",
-    image: "",
-    description: "Use filenames like prop-wooden-crate.png or map-candy-world.png to auto-tag cards.",
-    tags: ["prop", "low-poly", "roblox"]
-  },
-  {
-    title: "Lobby Build",
-    image: "",
-    description: "This site is ready for your real Roblox builds and will look better once you add images.",
-    tags: ["map", "lobby", "game-ready"]
+    title: "[SOUNDS] +1 Squish a Dumpling Escape!",
+    url: "https://www.roblox.com/games/135807790398223/1-Squish-a-Dumpling-Escape",
+    icon: "media/dumpling-icon.jpg",
+    thumbnail: "media/dumpling-thumbnail.jpg",
+    description: "A Roblox speed / obby experience where players squish dumplings, gain speed, race friends, unlock multipliers, and escape through a cozy dumpling-themed world."
   }
 ];
 
@@ -35,6 +30,7 @@ window.addEventListener("load", () => {
 });
 
 window.addEventListener("mousemove", (event) => {
+  if (!cursorGlow) return;
   cursorGlow.style.left = `${event.clientX}px`;
   cursorGlow.style.top = `${event.clientY}px`;
 });
@@ -77,8 +73,18 @@ const sectionObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll("section[id]").forEach((section) => sectionObserver.observe(section));
 
+function escapeHtml(value) {
+  return String(value).replace(/[&<>'"]/g, (character) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    "'": "&#39;",
+    '"': "&quot;"
+  }[character]));
+}
+
 function titleFromFileName(path) {
-  const file = path.split("/").pop() || "Project";
+  const file = path.split("/").pop() || "Build";
   return file
     .replace(/\.[^/.]+$/, "")
     .replace(/^\d+[-_ ]*/, "")
@@ -86,94 +92,113 @@ function titleFromFileName(path) {
     .replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
 
-function normalizeProject(project, index) {
-  const image = project.image || project.src || "";
-  const title = project.title || titleFromFileName(image) || `Project ${index + 1}`;
-  const rawTags = Array.isArray(project.tags) ? project.tags : [];
-  const filenameTags = image.toLowerCase().split(/[-_./ ]+/).filter(Boolean);
-  const tags = [...new Set([...rawTags, ...filenameTags].filter((tag) => ["map", "maps", "prop", "props", "showcase", "lobby", "environment", "low", "poly"].includes(tag)))];
-
-  return {
-    title,
-    image,
-    description: project.description || "Roblox build preview focused on clean style, readable layout, and game-ready presentation.",
-    tags: tags.length ? tags : ["roblox", "build"]
-  };
-}
-
-function placeholderGradient(title) {
-  const words = title.split(" ").slice(0, 2).join("+");
+function placeholderImage(title) {
+  const safeTitle = escapeHtml(title).slice(0, 42);
   return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(`
     <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
       <defs>
         <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
           <stop stop-color="#ff6a35"/>
-          <stop offset="0.56" stop-color="#111827"/>
-          <stop offset="1" stop-color="#5d86ff"/>
+          <stop offset="0.52" stop-color="#171d29"/>
+          <stop offset="1" stop-color="#ffffff" stop-opacity="0.3"/>
         </linearGradient>
       </defs>
       <rect width="1200" height="800" fill="#080b10"/>
-      <circle cx="220" cy="130" r="330" fill="#ff6a35" opacity="0.24"/>
-      <circle cx="1040" cy="690" r="410" fill="#5d86ff" opacity="0.18"/>
-      <rect x="72" y="72" width="1056" height="656" rx="52" fill="url(#g)" opacity="0.56"/>
-      <text x="92" y="672" fill="#ffffff" font-family="Inter, Arial" font-size="72" font-weight="800">${words}</text>
-    </svg>`)}`;
+      <circle cx="170" cy="135" r="360" fill="#ff6a35" opacity="0.28"/>
+      <circle cx="1060" cy="700" r="420" fill="#5174ff" opacity="0.16"/>
+      <rect x="66" y="66" width="1068" height="668" rx="54" fill="url(#g)" opacity="0.8"/>
+      <text x="92" y="684" fill="#ffffff" font-family="Inter, Arial" font-size="72" font-weight="900">${safeTitle}</text>
+    </svg>`)} `;
 }
 
-function renderProjects(projects, activeFilter = "all") {
-  const normalized = projects.map(normalizeProject);
-  const filtered = activeFilter === "all"
-    ? normalized
-    : normalized.filter((project) => project.tags.some((tag) => tag.toLowerCase().includes(activeFilter)));
+function normalizeProject(project, index) {
+  const image = project.image || project.src || "";
+  const title = project.title || titleFromFileName(image) || `Build ${index + 1}`;
 
-  projectGrid.innerHTML = "";
+  return {
+    title,
+    image: image || placeholderImage(title)
+  };
+}
 
-  if (!filtered.length) {
-    projectGrid.innerHTML = `<div class="empty-projects">No projects match this filter yet. Add images to the <code>projects</code> folder and commit your changes.</div>`;
+function renderProjects(projects) {
+  const normalized = projects.map(normalizeProject).filter((project) => project.image);
+  projectCarousel.innerHTML = "";
+
+  if (!normalized.length) {
+    projectCarousel.innerHTML = `<div class="empty-projects">No build images added yet.</div>`;
     return;
   }
 
-  filtered.forEach((project, index) => {
-    const card = document.createElement("article");
-    card.className = `project-card reveal ${index % 3 === 1 ? "delay-1" : index % 3 === 2 ? "delay-2" : ""}`;
-    card.innerHTML = `
-      <div class="project-media">
-        <img src="${project.image || placeholderGradient(project.title)}" alt="${project.title}" loading="lazy">
-      </div>
-      <div class="project-content">
-        <div class="tags">${project.tags.slice(0, 3).map((tag) => `<span>${tag}</span>`).join("")}</div>
-        <h3>${project.title}</h3>
-        <p>${project.description}</p>
-      </div>
-    `;
-
-    card.addEventListener("click", () => openProjectModal(project));
-    projectGrid.appendChild(card);
-    revealObserver.observe(card);
+  normalized.forEach((project) => {
+    const slide = document.createElement("article");
+    slide.className = "project-slide";
+    slide.innerHTML = `<img src="${escapeHtml(project.image)}" alt="${escapeHtml(project.title)}" loading="lazy">`;
+    slide.addEventListener("click", () => openImage(project.image));
+    projectCarousel.appendChild(slide);
   });
 }
 
-function openProjectModal(project) {
-  modalImage.src = project.image || placeholderGradient(project.title);
-  modalCaption.textContent = project.title;
+function renderGames(games) {
+  gameGrid.innerHTML = "";
+
+  games.forEach((game) => {
+    const card = document.createElement("article");
+    card.className = "game-card";
+    card.innerHTML = `
+      <div class="game-card-inner">
+        <a class="game-thumbnail" href="${escapeHtml(game.url)}" target="_blank" rel="noreferrer" aria-label="Open ${escapeHtml(game.title)} on Roblox">
+          <img src="${escapeHtml(game.thumbnail)}" alt="${escapeHtml(game.title)} thumbnail" loading="lazy">
+        </a>
+        <div class="game-info">
+          <div class="game-top">
+            <a class="game-icon" href="${escapeHtml(game.url)}" target="_blank" rel="noreferrer" aria-label="Open ${escapeHtml(game.title)} on Roblox">
+              <img src="${escapeHtml(game.icon)}" alt="${escapeHtml(game.title)} icon" loading="lazy">
+            </a>
+            <div>
+              <p class="game-kicker">Roblox Experience</p>
+              <h3>${escapeHtml(game.title)}</h3>
+            </div>
+          </div>
+          <p>${escapeHtml(game.description)}</p>
+          <div class="game-actions">
+            <a href="${escapeHtml(game.url)}" target="_blank" rel="noreferrer">Open on Roblox →</a>
+          </div>
+        </div>
+      </div>
+    `;
+    gameGrid.appendChild(card);
+  });
+}
+
+function openImage(src) {
+  modalImage.src = src;
   modal.classList.add("open");
   modal.setAttribute("aria-hidden", "false");
   document.body.classList.add("no-scroll");
 }
 
-function closeProjectModal() {
+function closeModal() {
   modal.classList.remove("open");
   modal.setAttribute("aria-hidden", "true");
   document.body.classList.remove("no-scroll");
 }
 
-modalClose.addEventListener("click", closeProjectModal);
+modalClose.addEventListener("click", closeModal);
 modal.addEventListener("click", (event) => {
-  if (event.target === modal) closeProjectModal();
+  if (event.target === modal) closeModal();
 });
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") closeProjectModal();
+  if (event.key === "Escape") closeModal();
+});
+
+carouselPrev.addEventListener("click", () => {
+  projectCarousel.scrollBy({ left: -projectCarousel.clientWidth * 0.78, behavior: "smooth" });
+});
+
+carouselNext.addEventListener("click", () => {
+  projectCarousel.scrollBy({ left: projectCarousel.clientWidth * 0.78, behavior: "smooth" });
 });
 
 async function loadSiteSettings() {
@@ -187,11 +212,11 @@ async function loadSiteSettings() {
       if (site[key]) element.textContent = site[key];
     });
 
-    const discordUrl = site.discordUrl || "#contact";
     const email = site.email || "philfromqc@gmail.com";
-    document.getElementById("discordLink").href = discordUrl;
-    document.getElementById("contactDiscord").href = discordUrl;
+    const robloxUrl = site.robloxUrl || "https://www.roblox.com/users/8330323665/profile";
     document.getElementById("contactEmail").href = `mailto:${email}`;
+    document.getElementById("robloxProfile").href = robloxUrl;
+    document.getElementById("contactRoblox").href = robloxUrl;
   } catch (error) {
     console.warn("Could not load site settings.", error);
   }
@@ -204,22 +229,33 @@ async function loadProjects() {
     const response = await fetch("data/projects.json", { cache: "no-store" });
     if (response.ok) {
       const data = await response.json();
-      projects = Array.isArray(data) ? data : data.projects || fallbackProjects;
+      const loaded = Array.isArray(data) ? data : data.projects;
+      if (Array.isArray(loaded) && loaded.length) projects = loaded;
     }
   } catch (error) {
-    console.warn("Could not load projects.json. Showing fallback cards.", error);
+    console.warn("Could not load projects.json. Showing fallback carousel.", error);
   }
 
   renderProjects(projects);
+}
 
-  document.querySelectorAll(".filter").forEach((button) => {
-    button.addEventListener("click", () => {
-      document.querySelectorAll(".filter").forEach((btn) => btn.classList.remove("active"));
-      button.classList.add("active");
-      renderProjects(projects, button.dataset.filter);
-    });
-  });
+async function loadGames() {
+  let games = fallbackGames;
+
+  try {
+    const response = await fetch("data/games.json", { cache: "no-store" });
+    if (response.ok) {
+      const data = await response.json();
+      const loaded = Array.isArray(data) ? data : data.games;
+      if (Array.isArray(loaded) && loaded.length) games = loaded;
+    }
+  } catch (error) {
+    console.warn("Could not load games.json. Showing fallback game.", error);
+  }
+
+  renderGames(games);
 }
 
 loadSiteSettings();
 loadProjects();
+loadGames();
