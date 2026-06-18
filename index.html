@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Roblox builder portfolio for projects and Roblox environments." />
+    <title>Roblox Builder Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="background-glow background-glow-one"></div>
+    <div class="background-glow background-glow-two"></div>
+    <div class="page-shell">
+      <header class="site-header glass-panel">
+        <a class="brand" href="#top" aria-label="Go to home">
+          <span class="brand-mark">RB</span>
+          <span class="brand-copy">
+            <strong data-site="name">Phil</strong>
+            <small data-site="role">Roblox Builder</small>
+          </span>
+        </a>
+
+        <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false">
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="#work">Work</a>
+          <a href="#process">Process</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </header>
+
+      <main id="top">
+        <section class="hero-section section-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Available for Roblox builds</p>
+            <h1 data-site="headline">Clean Roblox builds, fast delivery, smooth presentation.</h1>
+            <p class="hero-text" data-site="intro">
+              I build polished Roblox projects and environments with a clean low-poly style, strong readability, and consistent quality.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#work">View my work</a>
+              <a class="button button-secondary" href="#contact">Contact me</a>
+            </div>
+          </div>
+
+          <aside class="hero-card glass-panel">
+            <div class="orbital-card">
+              <div class="floating-cube cube-one"></div>
+              <div class="floating-cube cube-two"></div>
+              <div class="floating-cube cube-three"></div>
+              <div class="preview-window">
+                <div class="preview-topbar">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="preview-scene">
+                  <div class="preview-platform"></div>
+                  <div class="preview-block block-a"></div>
+                  <div class="preview-block block-b"></div>
+                  <div class="preview-block block-c"></div>
+                </div>
+              </div>
+            </div>
+            <div class="hero-card-footer">
+              <span>Portfolio folders</span>
+              <strong>Projects</strong>
+            </div>
+          </aside>
+        </section>
+
+        <section class="stats-row" aria-label="Portfolio highlights">
+          <article class="stat glass-panel">
+            <strong data-site="statOneNumber">Fast</strong>
+            <span data-site="statOneLabel">Delivery-focused workflow</span>
+          </article>
+          <article class="stat glass-panel">
+            <strong data-site="statTwoNumber">Clean</strong>
+            <span data-site="statTwoLabel">Low-poly and readable builds</span>
+          </article>
+          <article class="stat glass-panel">
+            <strong data-site="statThreeNumber">Ready</strong>
+            <span data-site="statThreeLabel">Project screenshots and builds</span>
+          </article>
+        </section>
+
+        <section id="work" class="work-section">
+          <div class="section-heading">
+            <p class="eyebrow">Selected work</p>
+            <h2>Your projects folder automatically turns into portfolio cards.</h2>
+            <p>
+              Upload images into the <code>projects</code> folder. The GitHub Action scans it and updates the gallery.
+            </p>
+          </div>
+
+          <div class="gallery-grid" id="galleryGrid" aria-live="polite"></div>
+          <p class="empty-state" id="emptyState" hidden>
+            No images yet. Add PNG, JPG, JPEG, GIF, SVG, or WEBP files to the <code>projects</code> folder.
+          </p>
+        </section>
+
+        <section id="process" class="process-section section-grid">
+          <div class="section-heading align-left">
+            <p class="eyebrow">How I work</p>
+            <h2>Simple, clean, and easy to update.</h2>
+            <p>
+              This portfolio is made for Roblox builders who want to show work quickly without editing code every time they add a new image.
+            </p>
+          </div>
+
+          <div class="process-cards">
+            <article class="process-card glass-panel">
+              <span>01</span>
+              <h3>Add images</h3>
+              <p>Drop your screenshots/renders into the projects folder.</p>
+            </article>
+            <article class="process-card glass-panel">
+              <span>02</span>
+              <h3>Push to GitHub</h3>
+              <p>GitHub scans the folders and prepares the site files.</p>
+            </article>
+            <article class="process-card glass-panel">
+              <span>03</span>
+              <h3>Share your link</h3>
+              <p>Your portfolio updates on your GitHub Pages website.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="contact" class="contact-section glass-panel">
+          <div>
+            <p class="eyebrow">Contact</p>
+            <h2>Want to work together?</h2>
+            <p data-site="contactText">Message me for Roblox project builds, maps, environments, and showcase work.</p>
+          </div>
+          <div class="contact-links">
+            <a id="robloxLink" href="#" target="_blank" rel="noreferrer">Roblox</a>
+            <a id="discordLink" href="#">Discord</a>
+            <a id="emailLink" href="#">Email</a>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <template id="galleryCardTemplate">
+      <article class="gallery-card glass-panel">
+        <button class="gallery-image-button" type="button" aria-label="Open image preview">
+          <img loading="lazy" alt="" />
+        </button>
+        <div class="gallery-card-copy">
+          <span class="gallery-category"></span>
+          <h3></h3>
+        </div>
+      </article>
+    </template>
+
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <button class="lightbox-close" type="button" aria-label="Close preview">×</button>
+      <img alt="Preview" />
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
