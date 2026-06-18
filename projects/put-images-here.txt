@@ -1,9 +1,0 @@
-Put your Roblox screenshots/images in this folder.
-
-Examples:
-map-candy-world.png
-prop-wooden-crate.png
-showcase-medieval-valley.jpg
-lobby-simulator-main.webp
-
-After you commit the images to GitHub, the GitHub Action updates data/projects.json automatically.
